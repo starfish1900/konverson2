@@ -57,3 +57,9 @@ The match seed is `42 + 1009 * gameIndex`, with indices 0–19; search node cap 
 Build with `npm run build`, then serve with `node scripts/serve.mjs`. With the server running, set `KONVERSON_PRODUCTION=1` and `KONVERSON_TEST_URL=http://127.0.0.1:4173`, then run `npm run test:e2e` to execute production smoke tests.
 
 The Render Blueprint and Linux build script are included. An actual Render build/deployment requires connecting the user's Git repository and Render account and has not been performed. No migrations or server services are needed. The delivered static production files were tested locally using the same worker and WASM assets intended for deployment.
+
+## Render build correction
+
+The first user-run Render deployment failed before compilation because the original script retained Render's read-only `/usr/local/rustup` environment setting. The corrected script always uses this checkout's `.tools/cargo` and `.tools/rustup`, bootstraps a local rustup even when a system copy exists, and passes the same local paths to the WASM build. Shell scripts have explicit LF checkout rules for Linux.
+
+`bash tests/render-build.test.sh` passes four isolated regression checks: fresh installation with inherited system paths, reuse of a cached local installation, stopping on a toolchain failure, and stopping on an installer download failure. The checks use mock external commands under Git Bash and require no downloads. Shell syntax validation also passes. A subsequent real Render deployment is still needed to verify the complete hosted build.

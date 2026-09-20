@@ -50,7 +50,7 @@ node scripts/serve.mjs
 | Node version environment variable | `NODE_VERSION=24.14.0` |
 | Disable duplicate automatic dependency install | `SKIP_INSTALL_DEPS=true` |
 
-The build script provisions the pinned Rust compiler and WASM target in the build environment, installs npm dependencies, and creates the complete production app. There is **no server process, database, API secret, or paid AI service**. Each visitor's device supplies the AI computation. The Blueprint starts with automatic deploys disabled so you control when to publish subsequent changes; enable them in Render if desired.
+The build script provisions the pinned Rust compiler and WASM target in the project's writable `.tools` directory, overriding any read-only system Rust paths inherited from Render. It installs npm dependencies and creates the complete production app. There is **no server process, database, API secret, or paid AI service**. Each visitor's device supplies the AI computation. The Blueprint starts with automatic deploys disabled so you control when to publish subsequent changes; enable them in Render if desired.
 
 The app uses one route and does not need an SPA catch-all rewrite. JavaScript, fonts, workers, and WASM are all same-origin assets. The Blueprint adds cache headers and the WASM content type; no cross-origin isolation headers are required.
 
