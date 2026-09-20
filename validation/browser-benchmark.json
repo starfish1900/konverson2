@@ -1,0 +1,811 @@
+{
+  "timestamp": "2026-09-20T11:31:01.489Z",
+  "source": "http://127.0.0.1:5173",
+  "browserVersion": "153.0.8010.12",
+  "hardwareConcurrency": 24,
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "methodology": "One seeded state per board size, 20 legal non-terminal placements; counts 1, 2, 4 and browser default. Each fresh pool is initialized and warmed for 250ms, then searched for1000ms. Search seeds vary by worker and run. Memory is estimated engine-owned storage, excluding browser/WASM runtime. Other local workloads may affect throughput.",
+  "samples": [
+    {
+      "boardSize": 9,
+      "requestedWorkers": 1,
+      "readyWorkers": 1,
+      "startupMs": 13.800000011920929,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":9,\"cells\":[0,0,0,9,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,3,0,4,3,0,0,0,1,0,0,0,2,0,0,2,3,0,0,10,9,0,3,0,0,0,0,0,0,12,11,1,0,2,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,10,1,0,0,0],\"active\":3,\"stage\":1,\"first\":57,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 29,
+      "legalMove": true,
+      "wallElapsedMs": 1000.3999999761581,
+      "elapsedMs": 1000.1999999880791,
+      "simulations": 17910,
+      "nodes": 17911,
+      "memoryBytes": 48009349,
+      "activeWorkers": 1,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 17910
+        }
+      ],
+      "contributingWorkers": 1,
+      "simulationsPerSecond": 17906.41871647017
+    },
+    {
+      "boardSize": 9,
+      "requestedWorkers": 2,
+      "readyWorkers": 2,
+      "startupMs": 12.5,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":9,\"cells\":[0,0,0,9,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,3,0,4,3,0,0,0,1,0,0,0,2,0,0,2,3,0,0,10,9,0,3,0,0,0,0,0,0,12,11,1,0,2,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,10,1,0,0,0],\"active\":3,\"stage\":1,\"first\":57,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 29,
+      "legalMove": true,
+      "wallElapsedMs": 1000.0999999642372,
+      "elapsedMs": 1000,
+      "simulations": 36250,
+      "nodes": 36252,
+      "memoryBytes": 96018698,
+      "activeWorkers": 2,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 18019
+        },
+        {
+          "id": 1,
+          "simulations": 18231
+        }
+      ],
+      "contributingWorkers": 2,
+      "simulationsPerSecond": 36250
+    },
+    {
+      "boardSize": 9,
+      "requestedWorkers": 4,
+      "readyWorkers": 4,
+      "startupMs": 18.69999998807907,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":9,\"cells\":[0,0,0,9,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,3,0,4,3,0,0,0,1,0,0,0,2,0,0,2,3,0,0,10,9,0,3,0,0,0,0,0,0,12,11,1,0,2,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,10,1,0,0,0],\"active\":3,\"stage\":1,\"first\":57,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 29,
+      "legalMove": true,
+      "wallElapsedMs": 1000.1999999880791,
+      "elapsedMs": 1000.0999999642372,
+      "simulations": 71937,
+      "nodes": 71941,
+      "memoryBytes": 192037396,
+      "activeWorkers": 4,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 17967
+        },
+        {
+          "id": 1,
+          "simulations": 18075
+        },
+        {
+          "id": 2,
+          "simulations": 17967
+        },
+        {
+          "id": 3,
+          "simulations": 17928
+        }
+      ],
+      "contributingWorkers": 4,
+      "simulationsPerSecond": 71929.80702187022
+    },
+    {
+      "boardSize": 9,
+      "requestedWorkers": 23,
+      "readyWorkers": 23,
+      "startupMs": 74.89999997615814,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":9,\"cells\":[0,0,0,9,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,3,0,4,3,0,0,0,1,0,0,0,2,0,0,2,3,0,0,10,9,0,3,0,0,0,0,0,0,12,11,1,0,2,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,10,1,0,0,0],\"active\":3,\"stage\":1,\"first\":57,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 29,
+      "legalMove": true,
+      "wallElapsedMs": 1000.6999999880791,
+      "elapsedMs": 1000.3999999761581,
+      "simulations": 253150,
+      "nodes": 253173,
+      "memoryBytes": 267142907,
+      "activeWorkers": 23,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 10958
+        },
+        {
+          "id": 1,
+          "simulations": 10920
+        },
+        {
+          "id": 2,
+          "simulations": 11188
+        },
+        {
+          "id": 3,
+          "simulations": 11026
+        },
+        {
+          "id": 4,
+          "simulations": 10994
+        },
+        {
+          "id": 5,
+          "simulations": 11034
+        },
+        {
+          "id": 6,
+          "simulations": 11202
+        },
+        {
+          "id": 7,
+          "simulations": 11222
+        },
+        {
+          "id": 8,
+          "simulations": 11059
+        },
+        {
+          "id": 9,
+          "simulations": 10997
+        },
+        {
+          "id": 10,
+          "simulations": 10909
+        },
+        {
+          "id": 11,
+          "simulations": 10959
+        },
+        {
+          "id": 12,
+          "simulations": 11042
+        },
+        {
+          "id": 13,
+          "simulations": 11004
+        },
+        {
+          "id": 14,
+          "simulations": 11162
+        },
+        {
+          "id": 15,
+          "simulations": 10810
+        },
+        {
+          "id": 16,
+          "simulations": 10938
+        },
+        {
+          "id": 17,
+          "simulations": 10870
+        },
+        {
+          "id": 18,
+          "simulations": 10875
+        },
+        {
+          "id": 19,
+          "simulations": 11022
+        },
+        {
+          "id": 20,
+          "simulations": 11017
+        },
+        {
+          "id": 21,
+          "simulations": 11058
+        },
+        {
+          "id": 22,
+          "simulations": 10884
+        }
+      ],
+      "contributingWorkers": 23,
+      "simulationsPerSecond": 253048.78049383563
+    },
+    {
+      "boardSize": 11,
+      "requestedWorkers": 1,
+      "readyWorkers": 1,
+      "startupMs": 10.300000011920929,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":11,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,12,9,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,11,0,0,2,0,10,0,0,0,0,0,0,0,2,4,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,9,1,0,0,0,0,0,0,0,2,0,3,4,0,0,0,0,10,1,0,0,0,2,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":35,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 92,
+      "legalMove": true,
+      "wallElapsedMs": 1000.1999999880791,
+      "elapsedMs": 1000.1999999880791,
+      "simulations": 13801,
+      "nodes": 13802,
+      "memoryBytes": 48009517,
+      "activeWorkers": 1,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 13801
+        }
+      ],
+      "contributingWorkers": 1,
+      "simulationsPerSecond": 13798.24035209407
+    },
+    {
+      "boardSize": 11,
+      "requestedWorkers": 2,
+      "readyWorkers": 2,
+      "startupMs": 10.800000011920929,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":11,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,12,9,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,11,0,0,2,0,10,0,0,0,0,0,0,0,2,4,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,9,1,0,0,0,0,0,0,0,2,0,3,4,0,0,0,0,10,1,0,0,0,2,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":35,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 92,
+      "legalMove": true,
+      "wallElapsedMs": 1000.2000000476837,
+      "elapsedMs": 1000.2000000476837,
+      "simulations": 27663,
+      "nodes": 27665,
+      "memoryBytes": 96019034,
+      "activeWorkers": 2,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 13801
+        },
+        {
+          "id": 1,
+          "simulations": 13862
+        }
+      ],
+      "contributingWorkers": 2,
+      "simulationsPerSecond": 27657.468504980196
+    },
+    {
+      "boardSize": 11,
+      "requestedWorkers": 4,
+      "readyWorkers": 4,
+      "startupMs": 16.69999998807907,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":11,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,12,9,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,11,0,0,2,0,10,0,0,0,0,0,0,0,2,4,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,9,1,0,0,0,0,0,0,0,2,0,3,4,0,0,0,0,10,1,0,0,0,2,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":35,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 92,
+      "legalMove": true,
+      "wallElapsedMs": 1000.1999999880791,
+      "elapsedMs": 1000.0999999642372,
+      "simulations": 53820,
+      "nodes": 53824,
+      "memoryBytes": 192038068,
+      "activeWorkers": 4,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 13424
+        },
+        {
+          "id": 1,
+          "simulations": 13416
+        },
+        {
+          "id": 2,
+          "simulations": 13428
+        },
+        {
+          "id": 3,
+          "simulations": 13552
+        }
+      ],
+      "contributingWorkers": 4,
+      "simulationsPerSecond": 53814.61854007055
+    },
+    {
+      "boardSize": 11,
+      "requestedWorkers": 23,
+      "readyWorkers": 23,
+      "startupMs": 79.69999998807907,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":11,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,12,9,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,11,0,0,2,0,10,0,0,0,0,0,0,0,2,4,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,9,1,0,0,0,0,0,0,0,2,0,3,4,0,0,0,0,10,1,0,0,0,2,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":35,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 92,
+      "legalMove": true,
+      "wallElapsedMs": 1000.8999999761581,
+      "elapsedMs": 1000.6999999880791,
+      "simulations": 189119,
+      "nodes": 189142,
+      "memoryBytes": 267146771,
+      "activeWorkers": 23,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 8112
+        },
+        {
+          "id": 1,
+          "simulations": 8311
+        },
+        {
+          "id": 2,
+          "simulations": 8219
+        },
+        {
+          "id": 3,
+          "simulations": 8372
+        },
+        {
+          "id": 4,
+          "simulations": 8226
+        },
+        {
+          "id": 5,
+          "simulations": 8145
+        },
+        {
+          "id": 6,
+          "simulations": 8302
+        },
+        {
+          "id": 7,
+          "simulations": 8273
+        },
+        {
+          "id": 8,
+          "simulations": 8345
+        },
+        {
+          "id": 9,
+          "simulations": 8316
+        },
+        {
+          "id": 10,
+          "simulations": 8242
+        },
+        {
+          "id": 11,
+          "simulations": 8261
+        },
+        {
+          "id": 12,
+          "simulations": 8140
+        },
+        {
+          "id": 13,
+          "simulations": 8110
+        },
+        {
+          "id": 14,
+          "simulations": 8255
+        },
+        {
+          "id": 15,
+          "simulations": 8096
+        },
+        {
+          "id": 16,
+          "simulations": 8142
+        },
+        {
+          "id": 17,
+          "simulations": 8241
+        },
+        {
+          "id": 18,
+          "simulations": 8184
+        },
+        {
+          "id": 19,
+          "simulations": 8182
+        },
+        {
+          "id": 20,
+          "simulations": 8106
+        },
+        {
+          "id": 21,
+          "simulations": 8294
+        },
+        {
+          "id": 22,
+          "simulations": 8245
+        }
+      ],
+      "contributingWorkers": 23,
+      "simulationsPerSecond": 188986.70930573888
+    },
+    {
+      "boardSize": 13,
+      "requestedWorkers": 1,
+      "readyWorkers": 1,
+      "startupMs": 10.100000023841858,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":13,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,9,0,0,0,0,0,2,0,0,4,0,0,11,0,0,0,0,0,0,0,0,0,0,0,10,0,2,0,0,0,0,3,4,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,12,0,0,0,10,0,0,0,0,0,3,0,2,0,0,0,0,0,0,0,0,0,0,0,3,0,1,0,2,0,0,0,0,0,0,0,0,0,0,9,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":61,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 28,
+      "legalMove": true,
+      "wallElapsedMs": 1000.1999999880791,
+      "elapsedMs": 1000.1999999880791,
+      "simulations": 11888,
+      "nodes": 11889,
+      "memoryBytes": 48009949,
+      "activeWorkers": 1,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 11888
+        }
+      ],
+      "contributingWorkers": 1,
+      "simulationsPerSecond": 11885.622875566574
+    },
+    {
+      "boardSize": 13,
+      "requestedWorkers": 2,
+      "readyWorkers": 2,
+      "startupMs": 11.399999976158142,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":13,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,9,0,0,0,0,0,2,0,0,4,0,0,11,0,0,0,0,0,0,0,0,0,0,0,10,0,2,0,0,0,0,3,4,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,12,0,0,0,10,0,0,0,0,0,3,0,2,0,0,0,0,0,0,0,0,0,0,0,3,0,1,0,2,0,0,0,0,0,0,0,0,0,0,9,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":61,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 124,
+      "legalMove": true,
+      "wallElapsedMs": 1000.2000000476837,
+      "elapsedMs": 1000.1000000238419,
+      "simulations": 23759,
+      "nodes": 23761,
+      "memoryBytes": 96019898,
+      "activeWorkers": 2,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 11915
+        },
+        {
+          "id": 1,
+          "simulations": 11844
+        }
+      ],
+      "contributingWorkers": 2,
+      "simulationsPerSecond": 23756.6243369999
+    },
+    {
+      "boardSize": 13,
+      "requestedWorkers": 4,
+      "readyWorkers": 4,
+      "startupMs": 17.599999964237213,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":13,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,9,0,0,0,0,0,2,0,0,4,0,0,11,0,0,0,0,0,0,0,0,0,0,0,10,0,2,0,0,0,0,3,4,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,12,0,0,0,10,0,0,0,0,0,3,0,2,0,0,0,0,0,0,0,0,0,0,0,3,0,1,0,2,0,0,0,0,0,0,0,0,0,0,9,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":61,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 124,
+      "legalMove": true,
+      "wallElapsedMs": 1000.4000000357628,
+      "elapsedMs": 1000.3000000119209,
+      "simulations": 47402,
+      "nodes": 47406,
+      "memoryBytes": 192039796,
+      "activeWorkers": 4,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 11861
+        },
+        {
+          "id": 1,
+          "simulations": 11846
+        },
+        {
+          "id": 2,
+          "simulations": 11855
+        },
+        {
+          "id": 3,
+          "simulations": 11840
+        }
+      ],
+      "contributingWorkers": 4,
+      "simulationsPerSecond": 47387.783664335795
+    },
+    {
+      "boardSize": 13,
+      "requestedWorkers": 23,
+      "readyWorkers": 23,
+      "startupMs": 79.69999998807907,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":13,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,9,0,0,0,0,0,2,0,0,4,0,0,11,0,0,0,0,0,0,0,0,0,0,0,10,0,2,0,0,0,0,3,4,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,12,0,0,0,10,0,0,0,0,0,3,0,2,0,0,0,0,0,0,0,0,0,0,0,3,0,1,0,2,0,0,0,0,0,0,0,0,0,0,9,0,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":61,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 124,
+      "legalMove": true,
+      "wallElapsedMs": 1000.6999999880791,
+      "elapsedMs": 1000.5,
+      "simulations": 156760,
+      "nodes": 156783,
+      "memoryBytes": 267156707,
+      "activeWorkers": 23,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 6695
+        },
+        {
+          "id": 1,
+          "simulations": 6800
+        },
+        {
+          "id": 2,
+          "simulations": 6823
+        },
+        {
+          "id": 3,
+          "simulations": 6807
+        },
+        {
+          "id": 4,
+          "simulations": 6973
+        },
+        {
+          "id": 5,
+          "simulations": 6896
+        },
+        {
+          "id": 6,
+          "simulations": 6845
+        },
+        {
+          "id": 7,
+          "simulations": 6787
+        },
+        {
+          "id": 8,
+          "simulations": 6869
+        },
+        {
+          "id": 9,
+          "simulations": 6851
+        },
+        {
+          "id": 10,
+          "simulations": 6804
+        },
+        {
+          "id": 11,
+          "simulations": 6736
+        },
+        {
+          "id": 12,
+          "simulations": 7029
+        },
+        {
+          "id": 13,
+          "simulations": 6722
+        },
+        {
+          "id": 14,
+          "simulations": 6813
+        },
+        {
+          "id": 15,
+          "simulations": 6787
+        },
+        {
+          "id": 16,
+          "simulations": 6774
+        },
+        {
+          "id": 17,
+          "simulations": 6785
+        },
+        {
+          "id": 18,
+          "simulations": 6754
+        },
+        {
+          "id": 19,
+          "simulations": 6714
+        },
+        {
+          "id": 20,
+          "simulations": 6772
+        },
+        {
+          "id": 21,
+          "simulations": 6830
+        },
+        {
+          "id": 22,
+          "simulations": 6894
+        }
+      ],
+      "contributingWorkers": 23,
+      "simulationsPerSecond": 156681.6591704148
+    },
+    {
+      "boardSize": 15,
+      "requestedWorkers": 1,
+      "readyWorkers": 1,
+      "startupMs": 10.5,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":15,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,3,11,0,0,0,0,0,0,2,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,9,3,2,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,2,10,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":87,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 26,
+      "legalMove": true,
+      "wallElapsedMs": 1000.3000000119209,
+      "elapsedMs": 1000.2000000476837,
+      "simulations": 9492,
+      "nodes": 9493,
+      "memoryBytes": 48010005,
+      "activeWorkers": 1,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 9492
+        }
+      ],
+      "contributingWorkers": 1,
+      "simulationsPerSecond": 9490.101979151646
+    },
+    {
+      "boardSize": 15,
+      "requestedWorkers": 2,
+      "readyWorkers": 2,
+      "startupMs": 11.5,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":15,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,3,11,0,0,0,0,0,0,2,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,9,3,2,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,2,10,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":87,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 112,
+      "legalMove": true,
+      "wallElapsedMs": 1000.2000000476837,
+      "elapsedMs": 1000.1000000238419,
+      "simulations": 18672,
+      "nodes": 18674,
+      "memoryBytes": 96020010,
+      "activeWorkers": 2,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 9333
+        },
+        {
+          "id": 1,
+          "simulations": 9339
+        }
+      ],
+      "contributingWorkers": 2,
+      "simulationsPerSecond": 18670.132986256245
+    },
+    {
+      "boardSize": 15,
+      "requestedWorkers": 4,
+      "readyWorkers": 4,
+      "startupMs": 21.899999976158142,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":15,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,3,11,0,0,0,0,0,0,2,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,9,3,2,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,2,10,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":87,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 191,
+      "legalMove": true,
+      "wallElapsedMs": 1000.3000000119209,
+      "elapsedMs": 1000.1999999880791,
+      "simulations": 37852,
+      "nodes": 37856,
+      "memoryBytes": 192040020,
+      "activeWorkers": 4,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 9475
+        },
+        {
+          "id": 1,
+          "simulations": 9461
+        },
+        {
+          "id": 2,
+          "simulations": 9414
+        },
+        {
+          "id": 3,
+          "simulations": 9502
+        }
+      ],
+      "contributingWorkers": 4,
+      "simulationsPerSecond": 37844.4311142283
+    },
+    {
+      "boardSize": 15,
+      "requestedWorkers": 23,
+      "readyWorkers": 23,
+      "startupMs": 75.59999996423721,
+      "statePlacements": 20,
+      "stateFingerprint": "{\"size\":15,\"cells\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,3,11,0,0,0,0,0,0,2,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,9,3,2,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,2,10,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"active\":3,\"stage\":1,\"first\":87,\"opening\":false,\"turn\":11,\"placements\":20,\"result\":null}",
+      "selectedMove": 191,
+      "legalMove": true,
+      "wallElapsedMs": 1001,
+      "elapsedMs": 1000.8000000119209,
+      "simulations": 123164,
+      "nodes": 123187,
+      "memoryBytes": 267157995,
+      "activeWorkers": 23,
+      "workers": [
+        {
+          "id": 0,
+          "simulations": 5333
+        },
+        {
+          "id": 1,
+          "simulations": 5356
+        },
+        {
+          "id": 2,
+          "simulations": 5419
+        },
+        {
+          "id": 3,
+          "simulations": 5351
+        },
+        {
+          "id": 4,
+          "simulations": 5327
+        },
+        {
+          "id": 5,
+          "simulations": 5494
+        },
+        {
+          "id": 6,
+          "simulations": 5364
+        },
+        {
+          "id": 7,
+          "simulations": 5413
+        },
+        {
+          "id": 8,
+          "simulations": 5342
+        },
+        {
+          "id": 9,
+          "simulations": 5307
+        },
+        {
+          "id": 10,
+          "simulations": 5321
+        },
+        {
+          "id": 11,
+          "simulations": 5401
+        },
+        {
+          "id": 12,
+          "simulations": 5329
+        },
+        {
+          "id": 13,
+          "simulations": 5273
+        },
+        {
+          "id": 14,
+          "simulations": 5253
+        },
+        {
+          "id": 15,
+          "simulations": 5345
+        },
+        {
+          "id": 16,
+          "simulations": 5314
+        },
+        {
+          "id": 17,
+          "simulations": 5382
+        },
+        {
+          "id": 18,
+          "simulations": 5346
+        },
+        {
+          "id": 19,
+          "simulations": 5292
+        },
+        {
+          "id": 20,
+          "simulations": 5370
+        },
+        {
+          "id": 21,
+          "simulations": 5373
+        },
+        {
+          "id": 22,
+          "simulations": 5459
+        }
+      ],
+      "contributingWorkers": 23,
+      "simulationsPerSecond": 123065.54756048457
+    }
+  ],
+  "errors": []
+}
