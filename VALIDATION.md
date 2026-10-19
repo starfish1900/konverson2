@@ -63,3 +63,18 @@ The Render Blueprint and Linux build script are included. An actual Render build
 The first user-run Render deployment failed before compilation because the original script retained Render's read-only `/usr/local/rustup` environment setting. The corrected script always uses this checkout's `.tools/cargo` and `.tools/rustup`, bootstraps a local rustup even when a system copy exists, and passes the same local paths to the WASM build. Shell scripts have explicit LF checkout rules for Linux.
 
 `bash tests/render-build.test.sh` passes four isolated regression checks: fresh installation with inherited system paths, reuse of a cached local installation, stopping on a toolchain failure, and stopping on an installer download failure. The checks use mock external commands under Git Bash and require no downloads. Shell syntax validation also passes. A subsequent real Render deployment is still needed to verify the complete hosted build.
+
+## Presentation update — 19 October 2026
+
+Updated the pawn materials and presentation timeline without changing Rust rules or AI search. Each conversion now animates for 1.1 seconds, with a lead-in and distance-based ripple giving a total of 1.28–1.60 seconds. The complete bracketing line remains visible during the conversion. A winning path waits for that presentation, draws for 2.2 seconds, and settles before the result panel appears.
+
+Validation for this update:
+
+- All 14 worker-pool tests passed.
+- All 10 browser scenarios passed in Chromium, Firefox and WebKit (30 checks), including complete games, keyboard input, all board sizes and mobile layout.
+- Focused checks sample actual intermediate pawn colors, verify OLD pawns remain circular, attempt input during the lockout, measure SVG trace progress, and confirm restart cancels pending effects and AI starts. Motion-preference changes cannot replay a completed conversion or hide a settled winning highlight.
+- Reduced-motion results appear immediately; the preference responds while the page is open.
+- Production smoke tests passed in all three browser engines, including actual WASM worker gameplay and absence of the development fixture API.
+- Type checking and the production frontend build passed. Desktop and mobile screenshots were visually inspected, with no horizontal page overflow or browser errors in the visual check.
+
+The refreshed `dist` and downloadable ZIP contain this update. Publication of these changes to Render has not been performed from this task.

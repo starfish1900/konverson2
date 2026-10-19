@@ -20,6 +20,27 @@ async function newMatch(page:Page, size=9, alliance='A + C', difficulty='Casual'
   await expect(page.getByTestId('game-board')).toHaveAttribute('data-size',String(size));
 }
 
+const rgb = (value:string) => value.match(/[\d.]+/g)!.slice(0,3).map(Number);
+const colorDistance = (a:string,b:string) => Math.hypot(...rgb(a).map((channel,index)=>channel-rgb(b)[index]));
+
+async function winningPathProgress(page:Page) {
+  return page.getByTestId('winning-path').evaluate(node=>{
+    const path=node as SVGPathElement;
+    const dash=getComputedStyle(path).strokeDasharray;
+    // Motion normalizes SVG paths with pathLength; inspect the rendered stroke,
+    // since an SVG element can be "visible" while none of its line is drawn.
+    if(dash==='none') return 1;
+    const normalizedLength=Number(path.getAttribute('pathLength'))||path.getTotalLength();
+    return Number.parseFloat(dash)/normalizedLength;
+  });
+}
+
+async function restartMatch(page:Page) {
+  await page.getByRole('button',{name:'Restart match',exact:true}).click();
+  await page.getByRole('dialog').getByRole('button',{name:'Restart match',exact:true}).click();
+  await expect(page.getByTestId('game-board')).toHaveAttribute('data-presenting','false');
+}
+
 test('opening, AI response, and the two-placement exclusion rule', async ({page}) => {
   const errors:string[]=[]; page.on('pageerror',error=>errors.push(error.message));
   await expect(page.getByRole('heading',{level:1})).toHaveText('Your move.');
@@ -64,22 +85,137 @@ test('all board sizes, keyboard navigation, preferences and readable rules',asyn
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
-test('conversions keep OLD posture and the winning path appears',async({page})=>{
+test('conversion colors unfold for over a second while mouse and keyboard placement stay locked',async({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});
   const ongoing=scenarios.fixtures[0];
   await page.evaluate(state=>window.__konversonQA!.load(state as GameState),ongoing.state);
+  const farPawn=page.locator('[data-index="50"]').getByTestId('pawn');
+  const oldColor=await farPawn.evaluate(node=>getComputedStyle(node).backgroundColor);
   await page.locator(`[data-index="${ongoing.moveIndex}"]`).click();
-  await expect.poll(async()=>page.evaluate(()=>window.__konversonQA!.snapshot())).toEqual(ongoing.expectedState);
+  const early=await farPawn.evaluate(node=>({
+    origin:performance.now(),color:getComputedStyle(node).backgroundColor,radius:getComputedStyle(node).borderRadius,
+    presenting:document.querySelector('[data-testid="game-board"]')?.getAttribute('data-presenting'),
+    converting:node.getAttribute('data-converting'),
+  }));
+  expect(colorDistance(early.color,oldColor)).toBeLessThan(8);
+  expect(early.radius).toBe('50%');
+  expect(early.presenting).toBe('true');
+  expect(early.converting).toBe('true');
+
+  // Attempt real input immediately, while no deliberate waiting has elapsed.
+  const second=page.locator('[data-legal="true"][data-cell="0"]').first();
+  await expect(second).toHaveAttribute('aria-disabled','true');
+  await second.click({force:true});
+  await second.focus();
+  await page.keyboard.press('Enter');
+
+  // Keep both paint samples on the browser clock, so automation round trips
+  // cannot accumulate into extra delays that outlast the presentation gate.
+  const samples=await page.evaluate(async origin=>{
+    const stateAfterAttempts=window.__konversonQA!.snapshot();
+    const sample=()=>({
+      elapsed:performance.now()-origin,
+      color:getComputedStyle(document.querySelector('[data-index="50"] [data-testid="pawn"]')!).backgroundColor,
+      presenting:document.querySelector('[data-testid="game-board"]')?.getAttribute('data-presenting'),
+    });
+    const waitUntil=(elapsed:number)=>new Promise<void>(resolve=>setTimeout(resolve,Math.max(0,origin+elapsed-performance.now())));
+    await waitUntil(750);
+    const middle=sample();
+    await waitUntil(1050);
+    return {stateAfterAttempts,middle,later:sample()};
+  },early.origin);
+  expect(samples.stateAfterAttempts).toEqual(ongoing.expectedState);
+  expect(samples.middle.presenting).toBe('true');
+  expect(samples.later.presenting).toBe('true');
   for(const index of ongoing.expectedEvents.find(e=>e.kind==='converted')!.indices){
     await expect(page.locator(`[data-index="${index}"] [data-posture="old"]`)).toHaveCount(1);
   }
+
+  const rayEndpoints=await page.getByTestId('conversion-ray').first().evaluate(node=>{
+    const ray=node as SVGPathElement;
+    const start=ray.getPointAtLength(0),end=ray.getPointAtLength(ray.getTotalLength());
+    return {start:[start.x,start.y],end:[end.x,end.y]};
+  });
+  expect(rayEndpoints).toEqual({start:[2.5,5.5],end:[6.5,5.5]});
+  await expect(page.getByTestId('game-board')).toHaveAttribute('data-presenting','false');
+  const finalColor=await farPawn.evaluate(node=>getComputedStyle(node).backgroundColor);
+  expect(colorDistance(samples.middle.color,oldColor)).toBeGreaterThan(1);
+  expect(colorDistance(samples.middle.color,finalColor)).toBeGreaterThan(8);
+  expect(colorDistance(samples.later.color,finalColor)).toBeLessThan(colorDistance(samples.middle.color,finalColor));
+  expect(colorDistance(oldColor,finalColor)).toBeGreaterThan(50);
+  await expect(second).toHaveAttribute('aria-disabled','false');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.waitForTimeout(100);
+  await expect(page.getByTestId('conversion-ray')).toHaveCount(0);
+  await expect(second).toHaveAttribute('aria-disabled','false');
+});
+
+test('the winning connexion waits for conversions then draws slowly before announcing the result',async({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});
   const winning=scenarios.fixtures[2];
   await page.evaluate(state=>window.__konversonQA!.load(state as GameState),winning.state);
   await page.locator(`[data-index="${winning.moveIndex}"]`).click();
-  await expect(page.getByTestId('winning-path')).toBeVisible();
+  expect(await page.evaluate(()=>window.__konversonQA!.snapshot())).toEqual(winning.expectedState);
+  await page.waitForTimeout(900);
+  expect(await winningPathProgress(page)).toBeLessThan(.01);
+  expect(await page.getByRole('status').count()).toBe(0);
+  await expect(page.getByTestId('game-board')).toHaveAttribute('data-presenting','true');
+
+  await expect.poll(()=>winningPathProgress(page),{intervals:[40,80,80]}).toBeGreaterThan(.03);
+  await page.waitForTimeout(1100);
+  const middleProgress=await winningPathProgress(page);
+  expect(middleProgress).toBeGreaterThan(.1);
+  expect(middleProgress).toBeLessThan(.98);
+  expect(await page.getByRole('status').count()).toBe(0);
+
   await expect(page.getByRole('status')).toContainText('You win');
-  await expect.poll(async()=>page.evaluate(()=>window.__konversonQA!.snapshot())).toEqual(winning.expectedState);
+  expect(await winningPathProgress(page)).toBeGreaterThan(.99);
+  await expect(page.getByTestId('game-board')).toHaveAttribute('data-presenting','false');
   expect(winning.expectedState.result!.path).not.toContain(winning.moveIndex);
+  const winningCell=page.locator(`[data-index="${winning.expectedState.result!.path[0]}"]`);
+  const settledHighlight=await winningCell.evaluate(node=>getComputedStyle(node).backgroundColor);
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.waitForTimeout(100);
+  expect(await winningCell.evaluate(node=>getComputedStyle(node).backgroundColor)).toBe(settledHighlight);
+  expect(await winningPathProgress(page)).toBeGreaterThan(.99);
   await page.screenshot({path:`test-results/victory-${test.info().project.name}.png`,fullPage:true});
+});
+
+test('restart during an AI-bound conversion cancels its pending turn and visual effects',async({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  const conversion=scenarios.fixtures[1];
+  await page.evaluate(state=>window.__konversonQA!.load(state as GameState),conversion.state);
+  await page.locator(`[data-index="${conversion.moveIndex}"]`).click();
+  await page.waitForTimeout(400);
+  expect(await page.evaluate(()=>window.__konversonQA!.snapshot()?.active)).toBe(2);
+  await expect(page.getByTestId('game-board')).toHaveAttribute('data-presenting','true');
+  await expect(page.getByTestId('ai-status')).not.toContainText('Considering');
+  await restartMatch(page);
+  await page.waitForTimeout(1800);
+  await expect(page.getByTestId('pawn')).toHaveCount(0);
+  await expect(page.getByTestId('conversion-ray')).toHaveCount(0);
+  await expect(page.getByTestId('winning-path')).toHaveCount(0);
+  await expect(page.getByRole('status')).toHaveCount(0);
+  await expect(page.getByTestId('ai-status')).not.toContainText('Considering');
+  expect(await page.evaluate(()=>window.__konversonQA!.snapshot()?.placements)).toBe(0);
+});
+
+test('restart during the winning trace prevents a delayed result from returning',async({page})=>{
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  const winning=scenarios.fixtures[2];
+  await page.evaluate(state=>window.__konversonQA!.load(state as GameState),winning.state);
+  await page.locator(`[data-index="${winning.moveIndex}"]`).click();
+  await expect.poll(()=>winningPathProgress(page),{intervals:[40,80,80]}).toBeGreaterThan(.15);
+  expect(await page.getByRole('status').count()).toBe(0);
+  await restartMatch(page);
+  await page.waitForTimeout(2800);
+  await expect(page.getByTestId('pawn')).toHaveCount(0);
+  await expect(page.getByTestId('winning-path')).toHaveCount(0);
+  await expect(page.getByRole('status')).toHaveCount(0);
+  await expect(page.getByTestId('game-board')).toHaveAttribute('data-presenting','false');
+  expect(await page.evaluate(()=>window.__konversonQA!.snapshot()?.result)).toBeNull();
 });
 
 test('restart during the AI opening cannot leave an identical board stalled',async({page})=>{
@@ -134,7 +270,9 @@ test('mobile layout, zoom, and reduced motion',async({page})=>{
   const fixture=scenarios.fixtures[2];
   await page.evaluate(state=>window.__konversonQA!.load(state as GameState),fixture.state);
   await page.locator(`[data-index="${fixture.moveIndex}"]`).click();
-  await expect(page.getByRole('status')).toContainText('You win');
+  await expect(page.getByRole('status')).toContainText('You win',{timeout:750});
+  await expect(page.getByTestId('game-board')).toHaveAttribute('data-presenting','false',{timeout:750});
+  expect(await winningPathProgress(page)).toBeGreaterThan(.99);
 });
 
 test('a complete human-versus-worker game reaches a legal result',async({page})=>{

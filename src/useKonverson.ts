@@ -4,6 +4,7 @@ import type { AiProgress } from './ai/pool';
 import { applyMove, createGame, explainMove, fingerprint, legalMoves, loadEngine } from './engine';
 import { allianceOf, BUDGETS } from './types';
 import type { GameSettings, GameState, GameEvent } from './types';
+import { presentationTime, useReducedMotionPreference } from './animation';
 
 export interface LastMove { index: number; color: number; before: number[]; converted: number[]; nonce: number; events: GameEvent[] }
 const maxWorkers = Math.max(1, navigator.hardwareConcurrency || 2);
@@ -39,6 +40,14 @@ export function useKonverson() {
   const turnTime = useRef({ turn: -1, used: 0 });
   const placementTime = useRef({ key: '', used: 0, allowance: 0 });
   const searchStarted = useRef<number | null>(null);
+  const reducedMotion = useReducedMotionPreference();
+
+  useEffect(() => {
+    if (reducedMotion && animating) {
+      if (animationTimer.current) clearTimeout(animationTimer.current);
+      setAnimating(false);
+    }
+  }, [reducedMotion, animating]);
 
   useEffect(() => {
     let live = true;
@@ -85,12 +94,13 @@ export function useKonverson() {
     setGame(result.state);
     setNotice('');
     const converted = result.events.filter(e => e.kind === 'converted').flatMap(e => e.indices);
-    setLastMove({ index, color: current.active, before: current.cells, converted, nonce: performance.now(), events: result.events });
+    const presentedMove = { index, color: current.active, before: current.cells, converted, nonce: performance.now(), events: result.events };
+    setLastMove(presentedMove);
     setAnimating(true);
     const ownEpoch = epoch.current;
     if (animationTimer.current) clearTimeout(animationTimer.current);
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    animationTimer.current = setTimeout(() => { if (epoch.current === ownEpoch) setAnimating(false); }, reduced ? 35 : converted.length ? 500 : 260);
+    animationTimer.current = setTimeout(() => { if (epoch.current === ownEpoch) setAnimating(false); }, presentationTime(presentedMove, current.size, result.state.result?.winner, reduced));
   }, []);
 
   const key = game ? fingerprint(game) : '';

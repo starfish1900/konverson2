@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { BookOpen, SlidersHorizontal, ArrowUpRight, Plus, Cpu, UserRound, RotateCcw, ArrowRight, Trophy, RefreshCw, CircleHelp } from 'lucide-react';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useReducedMotionPreference } from './animation';
 import { Board } from './Board';
 import { Dialog } from './Dialog';
 import { Rules } from './Rules';
@@ -18,7 +19,7 @@ export default function App() {
   const [dialog, setDialog] = useState<'rules' | 'settings' | 'new' | 'restart' | null>(null);
   const [draft, setDraft] = useState(settings);
   const closeDialog = useCallback(()=>setDialog(null),[]);
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotionPreference();
   const isHuman = game ? allianceOf(game.active) === settings.human : true;
   const humanWon = game?.result?.winner != null && allianceOf(game.result.winner) === settings.human;
   const first = game?.stage === 0;
@@ -45,9 +46,9 @@ export default function App() {
     <main className={styles.main}>
       <section className={styles.arena} aria-label="Game board">
         <div className={styles.arenaHeading}><div><p className={styles.eyebrow}>{game?.result?'THE MATCH IS COMPLETE':game?.opening?'LET THE CONNEXIONS BEGIN':match.thinking?'FINDING A WAY THROUGH':`TURN ${String(game?.turn??1).padStart(2,'0')} · ${first?'FIRST':'SECOND'} PLACEMENT`}</p><h1 aria-live="polite">{heading.slice(0,-1)}<span className={styles.brandPeriod}>.</span></h1><p className={styles.instruction} aria-live="polite">{instruction}</p></div>{game&&!game.result&&<span className={styles.turnBadge} style={{color:COLORS[game.active-1],borderColor:`${COLORS[game.active-1]}40`}}><span style={{background:COLORS[game.active-1]}}/> COLOR {LETTERS[game.active-1]}</span>}</div>
-        {game?<Board game={game} legal={match.legal} canPlay={isHuman&&!match.animating&&!game.result} labels={settings.labels} hints={settings.hints} lastMove={lastMove} onPlace={match.place}/>:<div className={styles.loadingBoard}><span className={styles.loadingRing}/><p>Preparing Konverson</p></div>}
+        {game?<Board game={game} legal={match.legal} canPlay={isHuman&&!match.animating&&!game.result} presenting={match.animating} labels={settings.labels} hints={settings.hints} lastMove={lastMove} onPlace={match.place}/>:<div className={styles.loadingBoard}><span className={styles.loadingRing}/><p>Preparing Konverson</p></div>}
         <div className={styles.boardMessage} aria-live="polite">{match.notice||(!game?.result&&game?.stage===1&&isHuman?'The shaded area is too close to your first pawn.':lastMove?`${LETTERS[lastMove.color-1]} · ${coordinate(lastMove.index,game?.size??11)}${lastMove.converted.length?` · ${lastMove.converted.length} pawn${lastMove.converted.length===1?'':'s'} converted`:''}`:'Side or corner: touching pawns can form a connexion.')}</div>
-        <AnimatePresence>{game?.result&&<motion.div className={styles.resultBanner} initial={reduced?false:{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{delay:reduced?0:1.1}} role="status"><Trophy size={24}/><div><h2>{game.result.winner?humanWon?'Beautifully connected. You win.':'A connexion for the AI.':'No connexion. This match is a draw.'}</h2><p>{game.result.winner?`Color ${LETTERS[game.result.winner-1]} found a path across the board.`:'A fresh board brings new possibilities.'}</p></div><button onClick={openNew}>Play again <ArrowRight size={16}/></button></motion.div>}</AnimatePresence>
+        <AnimatePresence>{game?.result&&!match.animating&&<motion.div className={styles.resultBanner} initial={reduced?false:{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{duration:reduced?0:.22}} role="status"><Trophy size={24}/><div><h2>{game.result.winner?humanWon?'Beautifully connected. You win.':'A connexion for the AI.':'No connexion. This match is a draw.'}</h2><p>{game.result.winner?`Color ${LETTERS[game.result.winner-1]} found a path across the board.`:'A fresh board brings new possibilities.'}</p></div><button onClick={openNew}>Play again <ArrowRight size={16}/></button></motion.div>}</AnimatePresence>
         {match.error&&<div className={styles.errorBanner} role="alert"><p>{match.error}</p><button onClick={match.booted?match.retry:()=>location.reload()}><RefreshCw size={15}/> {match.booted?'Retry AI':'Reload game'}</button></div>}
       </section>
       <aside className={styles.sidebar}>

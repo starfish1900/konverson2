@@ -67,6 +67,8 @@ Static sites can use Render's free hosting within the account's included bandwid
 
 Preferences for labels, guides and worker count stay in this browser. Match state is not saved across page reloads. AI computation pauses while the tab is hidden and workers are idle during human turns.
 
+Pawns have glossy beveled faces and shaded lower edges, while NEW pawns remain square and OLD pawns circular. Conversions show the full bracketing line and change each pawn's color over 1.1 seconds, with a short ripple across the line (1.28–1.60 seconds overall). Play resumes only after the conversion settles. Winning connexions draw over 2.2 seconds after any conversions, followed by a gentle glow and the result panel. Reduced-motion settings remove these waits, including when the preference changes while the game is open.
+
 ## Architecture
 
 - `engine/`: authoritative Rust rules, state validation, exact winning-path detection and heuristic-guided MCTS. Pure native tests and a reproducible baseline benchmark are included.
